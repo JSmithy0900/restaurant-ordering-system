@@ -1,0 +1,89 @@
+/* src/Home.css */
+
+.homepage {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Banner Section */
+  .banner {
+    background-image: url('https://via.placeholder.com/1920x600'); /* Replace with an image that fits your style */
+    background-size: cover;
+    background-position: center;
+    height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    text-align: center;
+    position: relative;
+  }
+  
+  .banner::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4); /* Dark overlay for better text readability */
+  }
+  
+  .banner-content {
+    position: relative;
+    padding: 40px;
+    z-index: 1;
+  }
+  
+  .order-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #e21b70;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+  }
+  
+  /* Featured Section */
+  .featured {
+    padding: 60px 40px;
+    text-align: center;
+  }
+  
+  .featured h2 {
+    margin-bottom: 40px;
+    font-size: 32px;
+  }
+  
+  .featured-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .featured-item {
+    flex: 1 1 calc(25% - 40px);
+    max-width: calc(25% - 40px);
+    min-width: 250px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  .featured-item img {
+    width: 100%;
+    display: block;
+  }
+  
+  .featured-item p {
+    padding: 10px;
+    margin: 0;
+    background-color: #fff;
+    font-weight: bold;
+  }
+  
