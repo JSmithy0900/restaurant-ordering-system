@@ -12,7 +12,7 @@ function MenuPage() {
   useEffect(() => {
     const fetchMenu = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/menu');
+        const response = await fetch('https://restaurant-ordering-system-1.onrender.com/menu');
         if (!response.ok) {
           throw new Error('Error fetching menu');
         }
