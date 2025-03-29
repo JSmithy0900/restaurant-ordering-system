@@ -1,7 +1,7 @@
 // backend/seedAdmin.js
 require('dotenv').config({ path: __dirname + '/../.env' });
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const User = require('./models/Users'); // Ensure this path is correct
 
 const saltRounds = 10;

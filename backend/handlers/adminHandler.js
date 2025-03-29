@@ -1,5 +1,5 @@
 // controllers/adminController.js
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const User = require('../models/Users');
 const saltRounds = 10;
 
