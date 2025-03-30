@@ -1,69 +1,40 @@
-/* src/MenuPage.css */
+.menu-page {
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+}
 
-/* Global box-sizing */
-*, *::before, *::after {
-    box-sizing: border-box;
-  }
-  
-  .menu-page {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    color: #333;
-    margin: 0;
-    padding: 0;
-  }
-  
-  /* Main content styles */
-  .menu-content {
-    margin-top: 100px; /* account for fixed header */
-    padding: 40px 20px;
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  .menu-content h1 {
-    text-align: center;
-    margin-bottom: 40px;
-  }
-  
-  /* Menu grid styling */
-  .menu-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-  }
-  
-  .menu-item {
-    background-color: #fff;
-    border: 1px solid #e5e5e5;
-    border-radius: 5px;
-    overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    max-width: 300px;
-    text-align: center;
-    transition: transform 0.2s;
-  }
-  
-  .menu-item:hover {
-    transform: scale(1.03);
-  }
-  
-  .menu-item img {
-    width: 100%;
-    display: block;
-  }
-  
-  .menu-item h3 {
-    margin: 10px 0;
-    font-size: 20px;
-  }
-  
-  .menu-item p {
-    padding: 0 10px;
-  }
-  
-  .price {
-    font-weight: bold;
-    margin: 10px 0;
-  }
+/* Main menu area */
+.menu-content {
+  flex: 3;
+  padding: 50px;
+  overflow-y: auto;
+}
+
+/* Sidebar for the cart */
+.cart-sidebar {
+  flex: 1;
+  padding: 20px;
+  background-color: #f4f4f4;
+  border-left: 1px solid #ccc;
+  overflow-y: auto;
+}
+
+.menu-item {
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+}
+
+.menu-item button {
+  margin-top: 10px;
+}
+
+.cart-items {
+  list-style: none;
+  padding: 0;
+}
+
+.cart-item {
+  margin-bottom: 10px;
+}

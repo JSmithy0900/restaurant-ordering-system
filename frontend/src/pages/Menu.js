@@ -1,48 +1,60 @@
-// src/MenuPage.js
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../css/Menu.css';
 import '../css/app.css';
 
-function MenuPage() {
+function MenuPageWithCart() {
+  // State for menu items (fetched from your backend)
   const [menuItems, setMenuItems] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  // State for items added to the cart
+  const [cart, setCart] = useState([]);
 
+  // Fetch menu items from your backend when the component mounts
   useEffect(() => {
-    const fetchMenu = async () => {
-      try {
-        const response = await fetch('https://restaurant-ordering-system-1.onrender.com/menu');
-        if (!response.ok) {
-          throw new Error('Error fetching menu');
-        }
-        const data = await response.json();
-        setMenuItems(data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchMenu();
+    fetch('https://restaurant-ordering-system-qbfz.onrender.com/api/menu')
+      .then((res) => res.json())
+      .then((data) => setMenuItems(data))
+      .catch((err) => console.error('Error fetching menu items:', err));
   }, []);
 
-  if (loading) {
-    return (
-      <div className="menu-page">
-        <p>Loading menu...</p>
-      </div>
-    );
-  }
+  // Function to add an item to the cart
+  const addToCart = (item) => {
+    setCart((prevCart) => {
+      const existingItem = prevCart.find((cartItem) => cartItem._id === item._id);
+      if (existingItem) {
+        return prevCart.map((cartItem) =>
+          cartItem._id === item._id
+            ? { ...cartItem, quantity: cartItem.quantity + 1 }
+            : cartItem
+        );
+      } else {
+        return [...prevCart, { ...item, quantity: 1 }];
+      }
+    });
+  };
 
-  if (error) {
-    return (
-      <div className="menu-page">
-        <p>Error: {error}</p>
-      </div>
+  // Increase quantity of an item in the cart
+  const increaseQuantity = (itemId) => {
+    setCart((prevCart) =>
+      prevCart.map((item) =>
+        item._id === itemId ? { ...item, quantity: item.quantity + 1 } : item
+      )
     );
-  }
+  };
+
+  // Decrease quantity; if quantity goes to zero, remove the item
+  const decreaseQuantity = (itemId) => {
+    setCart((prevCart) =>
+      prevCart
+        .map((item) =>
+          item._id === itemId ? { ...item, quantity: item.quantity - 1 } : item
+        )
+        .filter((item) => item.quantity > 0)
+    );
+  };
+
+  // Calculate total price
+  const total = cart.reduce((acc, item) => acc + item.quantity * item.price, 0);
 
   return (
     <div className="menu-page">
@@ -61,28 +73,46 @@ function MenuPage() {
         </div>
       </header>
 
-      <main className="menu-content">
+      <div className="menu-content">
         <h1>Our Menu</h1>
-        <div className="menu-grid">
-          {menuItems.map((item) => (
+        {menuItems.length === 0 ? (
+          <p>Loading menu...</p>
+        ) : (
+          menuItems.map((item) => (
             <div key={item._id} className="menu-item">
-              <img
-                src={item.imageUrl || 'https://via.placeholder.com/300x200'}
-                alt={item.name}
-              />
               <h3>{item.name}</h3>
               <p>{item.description}</p>
-              <p className="price">${item.price.toFixed(2)}</p>
+              <p>${item.price.toFixed(2)}</p>
+              <button onClick={() => addToCart(item)}>Add to Cart</button>
             </div>
-          ))}
-        </div>
-      </main>
+          ))
+        )}
+      </div>
 
-      <footer className="footer">
-        <p>© 2025 My Restaurant. All rights reserved.</p>
-      </footer>
+      {cart.length > 0 && (
+        <aside className="cart-sidebar">
+          <h2>Your Basket</h2>
+          <ul className="cart-items">
+            {cart.map((item) => (
+              <li key={item._id} className="cart-item">
+                <span className="item-name">{item.name}</span>
+                <div className="item-controls">
+                  <button onClick={() => decreaseQuantity(item._id)}>-</button>
+                  <span className="item-quantity">x {item.quantity}</span>
+                  <button onClick={() => increaseQuantity(item._id)}>+</button>
+                </div>
+                <span className="item-price">
+                  = ${(item.price * item.quantity).toFixed(2)}
+                </span>
+              </li>
+            ))}
+          </ul>
+          <h2>Total: ${total.toFixed(2)}</h2>
+          <button className="checkout-button">Proceed to Checkout</button>
+        </aside>
+      )}
     </div>
   );
 }
 
-export default MenuPage;
+export default MenuPageWithCart;
