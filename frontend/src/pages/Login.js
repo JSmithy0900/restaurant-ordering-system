@@ -61,6 +61,7 @@ function LoginPage() {
         </div>
       </header>
       
+      <div className="app-container">
       <div className="login-container">
         <h1>Login</h1>
         <form onSubmit={handleSubmit}>
@@ -90,6 +91,7 @@ function LoginPage() {
         <p className="register-link">
           Don't have an account? <Link to="/register">Register here</Link>.
         </p>
+      </div>
       </div>
       
       <footer className="footer">

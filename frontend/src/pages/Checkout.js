@@ -132,6 +132,7 @@ function CheckoutPage() {
   };
 
   return (
+
     <div className="checkout-page">
       <NavBar />
 
@@ -237,16 +238,8 @@ function CheckoutPage() {
           </form>
           {message && <p className="order-message">{message}</p>}
         </section>
-        <div>
-          <h1>Our Location</h1>
-          <GoogleMapComponent />
-        </div>
       </main>
 
-      {/* Footer */}
-      <footer className="footer">
-        <p>© 2025 My Restaurant. All rights reserved.</p>
-      </footer>
     </div>
   );
 }

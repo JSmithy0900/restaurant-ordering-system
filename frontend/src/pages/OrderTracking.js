@@ -69,6 +69,9 @@ function OrderTrackingPage() {
         {order.status === 'Preparing' && <p>Your food is being prepared...</p>}
         {order.status === 'Delivered' && <p>Your order has been delivered!</p>}
       </div>
+      <footer className="footer">
+        <p>© 2025 My Restaurant. All rights reserved.</p>
+      </footer>
     </div>
   );
 }

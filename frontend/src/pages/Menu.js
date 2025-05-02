@@ -82,7 +82,7 @@ export default function MenuPageWithCart() {
                     />
                     <h3>{item.name}</h3>
                     <p>{item.description}</p>
-                    <p className="price">${item.price.toFixed(2)}</p>
+                    <p className="price">£{item.price.toFixed(2)}</p>
                     <button onClick={() => addToCart(item)}>
                       Add to Cart
                     </button>
@@ -111,7 +111,7 @@ export default function MenuPageWithCart() {
                   <button onClick={() => increaseQuantity(ci._id)}>+</button>
                 </div>
                 <span className="item-price">
-                  = ${(ci.price * ci.quantity).toFixed(2)}
+                  = £{(ci.price * ci.quantity).toFixed(2)}
                 </span>
               </li>
             ))}

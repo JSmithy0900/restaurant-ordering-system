@@ -27,13 +27,27 @@ function Home() {
         <div className="banner-content">
           <h1>Welcome to My Restaurant</h1>
           <p>Fresh, modern cuisine served daily</p>
-          <Link className="order-button" to="/order">Order Now</Link>
+          <Link className="order-button" to="/menu">Order Now</Link>
         </div>
       </section>
 
       <section className="featured">
         <h2>Our Specialties</h2>
         <div className="featured-grid">
+          <div className="specialty-card">
+            <img
+              src="/images/beefburger.png"
+              alt="Our Signature Burger"
+            />
+            <h3>Signature Burger</h3>
+          </div>
+          <div className="specialty-card">
+            <img
+              src="/images/margheritapizza.png"
+              alt="Wood-Fired Pizza"
+            />
+            <h3>Wood-Fired Pizza</h3>
+          </div>
         </div>
       </section>
 

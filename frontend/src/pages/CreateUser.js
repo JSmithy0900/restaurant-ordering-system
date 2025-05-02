@@ -23,7 +23,7 @@ function AdminCreateUser() {
     try {
       // Retrieve token from localStorage
       const token = localStorage.getItem('token');
-      const response = await fetch('https://restaurant-ordering-system-1.onrender.com/create-user', {
+      const response = await fetch('https://restaurant-ordering-system-qbfz.onrender.com/api/admin/create-user', {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
