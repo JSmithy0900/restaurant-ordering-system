@@ -5,3 +5,7 @@ node_modules
 # OS and editor files
 .DS_Store
 .vscode/
+
+# environment
+.env
+frontend/.env
