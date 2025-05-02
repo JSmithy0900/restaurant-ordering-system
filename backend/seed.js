@@ -5,28 +5,32 @@ const MenuItem = require('./models/MenuItem');
 
 const menuItems = [
   {
-    name: 'Chicken Teriyaki',
+    name: 'Test',
     description: 'Grilled chicken glazed with teriyaki sauce, served with steamed rice and vegetables.',
     price: 12.99,
-    imageUrl: 'https://via.placeholder.com/300x200?text=Chicken+Teriyaki'
+    imageUrl: '/images/ID.jpg',
+    category: 'Main'
   },
   {
     name: 'Veggie Ramen',
     description: 'A flavorful broth with noodles, mixed vegetables, and tofu.',
     price: 10.99,
-    imageUrl: 'https://via.placeholder.com/300x200?text=Veggie+Ramen'
+    imageUrl: '',
+    category: 'Starter'
   },
   {
     name: 'Beef Bulgogi',
     description: 'Thinly sliced beef marinated in a savory sauce, served with rice and kimchi.',
     price: 14.99,
-    imageUrl: 'https://via.placeholder.com/300x200?text=Beef+Bulgogi'
+    imageUrl: '',
+    category: 'Main'
   },
   {
     name: 'Spring Rolls',
     description: 'Crispy spring rolls filled with vegetables, served with a sweet chili dipping sauce.',
     price: 6.99,
-    imageUrl: 'https://via.placeholder.com/300x200?text=Spring+Rolls'
+    imageUrl: '',
+    category: 'Starter'
   }
 ];
 
@@ -37,7 +41,6 @@ mongoose.connect(process.env.MONGODB_URI, {
   .then(async () => {
     console.log('Connected to MongoDB Atlas, seeding menu items...');
     
-    // Optional: Clear existing menu items before seeding new data
     await MenuItem.deleteMany({});
     
     // Insert default menu items

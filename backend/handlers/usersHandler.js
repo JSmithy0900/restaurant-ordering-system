@@ -1,8 +1,6 @@
-// backend/controllers/authController.js
-
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const User = require('../models/Users'); // Adjust path if necessary
+const User = require('../models/Users'); 
 
 const saltRounds = 10;
 
@@ -20,7 +18,7 @@ exports.registerUser = async (req, res) => {
     // Hash the password before saving
     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-    // Create a new user (default role could be 'customer'; adjust as needed)
+    // Create a new user 
     const newUser = new User({
       name,
       email,
@@ -57,7 +55,9 @@ exports.loginUser = async (req, res) => {
     // Create a payload for the token with relevant user details
     const payload = {
       id: user._id,
+      name: user.name,
       email: user.email,
+      phone: user.phone,
       role: user.role,
     };
 

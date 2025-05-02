@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import NavBar from '../components/NavBar';
 
 function AdminCreateUser() {
   const [formData, setFormData] = useState({
@@ -42,6 +43,7 @@ function AdminCreateUser() {
 
   return (
     <div>
+      <NavBar />
       <h1>Create New User</h1>
       <form onSubmit={handleSubmit}>
         <input type="text" name="name" placeholder="Name" onChange={handleChange} required />

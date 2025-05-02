@@ -1,8 +1,7 @@
-// middleware/authMiddleware.js
 const jwt = require('jsonwebtoken');
 
-exports.verifyToken = (req, res, next) => {
-  // The token is typically sent in the Authorization header as "Bearer <token>"
+module.exports.verifyToken = (req, res, next) => {
+  
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
 
@@ -21,12 +20,20 @@ exports.verifyToken = (req, res, next) => {
   });
 };
 
-// Optionally, you can create a middleware to check for admin role
-exports.verifyAdmin = (req, res, next) => {
+module.exports.verifyAdmin = (req, res, next) => {
   // Use verifyToken first to ensure req.user exists
   if (req.user && req.user.role === 'admin') {
     next();
   } else {
     return res.status(403).json({ error: 'Access denied, admin only' });
+  }
+};
+
+module.exports.verifyStaffOrAdmin = (req, res, next) => {
+  const user = req.user;
+  if (user && (user.role === 'staff' || user.role === 'admin')) {
+    next();
+  } else {
+    res.status(403).json({ error: 'Access denied. Staff or admin only.' });
   }
 };

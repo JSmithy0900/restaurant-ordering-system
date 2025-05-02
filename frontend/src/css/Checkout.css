@@ -1,0 +1,42 @@
+.order-summary {
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+  }
+  
+  /* Turns the list into stacked rows */
+  .summary-list {
+    margin-top: 1rem;
+  }
+  
+  /* Each item row */
+  .summary-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  /* Remove border on last item */
+  .summary-item:last-child {
+    border-bottom: none;
+  }
+  
+  /* Overall total row */
+  .summary-total {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-top: 1rem;
+    padding-top: 0.75rem;
+    border-top: 2px solid #333;
+  }
+  
+  /* Just a little spacing and style for the headings */
+  .order-summary h2 {
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+  }
+  

@@ -71,7 +71,7 @@ html, body {
   /* Main content styles */
   .main-content {
     flex: 1; /* Fills available vertical space */
-    margin-top: 100px; /* Adjust if your header is fixed */
+    margin-top: 100px; 
     padding: 20px;
     max-width: 1200px;
     margin-left: auto;

@@ -1,31 +1,27 @@
-// src/Home.js
 import React from 'react';
-import { useAuth } from '../context/AuthContext'; // Ensure correct path to your AuthContext
-import { Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext'; 
+import { Link, useNavigate } from 'react-router-dom';
+import NavBar from '../components/NavBar';
 import '../css/Home.css';
 import '../css/app.css';
 
 function Home() {
-  const { user } = useAuth();
+  const { user, setUser } = useAuth();
+  const navigate = useNavigate();
+
+  // Function to log the user out.
+  const handleLogout = () => {
+    // Remove user data and token from localStorage
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    setUser(null);
+    
+    navigate('/login');
+  };
 
   return (
     <div className="homepage">
-      <header className="header">
-        <div className="header-container">
-          <div className="logo">My Restaurant</div>
-          <nav className="nav">
-            <ul>
-              <li><Link to="/menu">Menu</Link></li>
-              <li><Link to="/order">Order</Link></li>
-              <li><Link to="/contact">Contact</Link></li>
-              <li><Link to="/login">Login</Link></li>
-              {user && user.role === 'admin' && (
-                <li><Link to="/create-user">Create User</Link></li>
-              )}
-            </ul>
-          </nav>
-        </div>
-      </header>
+            <NavBar />
 
       <section className="banner">
         <div className="banner-content">
@@ -38,17 +34,7 @@ function Home() {
       <section className="featured">
         <h2>Our Specialties</h2>
         <div className="featured-grid">
-          {/* ... your dish items ... */}
         </div>
-      </section>
-
-      {/* Show the currently logged-in user (if any) */}
-      <section className="user-info">
-        {user ? (
-          <p>You are logged in as <strong>{user.name}</strong> (Role: {user.role})</p>
-        ) : (
-          <p>You are not logged in.</p>
-        )}
       </section>
 
       <footer className="footer">

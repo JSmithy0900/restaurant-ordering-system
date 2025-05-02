@@ -1,8 +1,7 @@
-// backend/seedAdmin.js
 require('dotenv').config({ path: __dirname + '/../.env' });
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
-const User = require('./models/Users'); // Ensure this path is correct
+const User = require('./models/Users'); 
 
 const saltRounds = 10;
 
@@ -20,7 +19,6 @@ mongoose.connect(process.env.MONGODB_URI, {
 })
   .then(async () => {
     console.log('Connected to MongoDB Atlas, seeding admin user...');
-    // Optionally remove existing admin user if one exists:
     await User.deleteOne({ email: adminUser.email });
 
     // Hash the admin's password

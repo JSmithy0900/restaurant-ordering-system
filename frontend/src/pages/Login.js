@@ -1,7 +1,7 @@
-// src/LoginPage.js
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { Link, useNavigate } from 'react-router-dom';
+import NavBar from '../components/NavBar';
 import '../css/Login.css';
 import '../css/app.css';
 
@@ -12,6 +12,7 @@ function LoginPage() {
   });
   const [message, setMessage] = useState('');
   const { setUser } = useAuth();
+  const navigate = useNavigate(); 
 
   const handleChange = (e) => {
     setCredentials({
@@ -33,7 +34,9 @@ function LoginPage() {
         throw new Error(data.error || 'Login failed');
       }
       localStorage.setItem('token', data.token);
-      setUser(data.user); // <-- This updates AuthContext so other components see the user as logged in
+      setUser(data.user); 
+      navigate('/'); 
+      console.log("User data:", data.user);
       setMessage('Login successful!');
     } catch (err) {
       setMessage(err.message);
@@ -43,6 +46,7 @@ function LoginPage() {
 
   return (
     <div className="login-page">
+      <NavBar />
       <header className="header">
         <div className="header-container">
         <div className="logo">My Restaurant</div>
