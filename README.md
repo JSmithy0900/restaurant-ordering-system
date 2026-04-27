@@ -1,5 +1,7 @@
 # Restaurant Ordering System
 
+**Live site:** https://restaurant-ordering-system-1.onrender.com/
+
 A full-stack web application for online restaurant ordering with real-time order tracking, Stripe payments, and SMS notifications.
 
 ## Features
