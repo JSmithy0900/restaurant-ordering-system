@@ -112,7 +112,7 @@ export default function OrdersManagement() {
                     </td>
                     <td>{order.address}</td>
                     <td>£{order.total.toFixed(2)}</td>
-                    <td>{order.status}</td>
+                    <td><span className={`status-badge status-${order.status}`}>{order.status}</span></td>
                     <td>
                       <button onClick={() => updateStatus(order._id, order.status)}>
                         Next Stage

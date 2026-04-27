@@ -2,31 +2,26 @@ import React, { useState } from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { useNavigate } from 'react-router-dom';
 
-
 const CARD_ELEMENT_OPTIONS = {
   hidePostalCode: true,
   style: {
     base: {
-      color: "#32325d",
-      fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-      fontSmoothing: "antialiased",
-      fontSize: "16px",
-      "::placeholder": { color: "#a0aec0" }
+      color: '#1a1a1a',
+      fontFamily: '"Inter", "Helvetica Neue", Helvetica, sans-serif',
+      fontSmoothing: 'antialiased',
+      fontSize: '15px',
+      '::placeholder': { color: '#b0aba5' }
     },
-    invalid: {
-      color: "#fa755a",
-      iconColor: "#fa755a"
-    }
+    invalid: { color: '#dc2626', iconColor: '#dc2626' }
   }
 };
 
-function PaymentForm({ orderId, orderAmount }) {  // orderAmount comes as a prop
+function PaymentForm({ orderId, orderAmount }) {
   const stripe = useStripe();
   const elements = useElements();
   const navigate = useNavigate();
   const amountInPence = Math.round(orderAmount * 100);
-  
-  
+
   const [error, setError] = useState(null);
   const [processing, setProcessing] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -34,58 +29,53 @@ function PaymentForm({ orderId, orderAmount }) {  // orderAmount comes as a prop
   const handleSubmit = async (event) => {
     event.preventDefault();
     setProcessing(true);
-    
+
     if (!stripe || !elements) return;
 
     const cardElement = elements.getElement(CardElement);
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
+    const { error: methodError, paymentMethod } = await stripe.createPaymentMethod({
       type: 'card',
       card: cardElement,
     });
-    
-    if (error) {
-      setError(error.message);
+
+    if (methodError) {
+      setError(methodError.message);
       setProcessing(false);
       return;
     }
-    
+
     setError(null);
-    console.log("PaymentMethod created:", paymentMethod);
-    
+
     try {
       const response = await fetch('https://restaurant-ordering-system-qbfz.onrender.com/api/stripe/create-payment-intent', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          paymentMethodId: paymentMethod.id,
-          amount: amountInPence,  // Now using the amount from props
-          orderId: orderId        // Pass the orderId from props
-        }),
+        body: JSON.stringify({ paymentMethodId: paymentMethod.id, amount: amountInPence, orderId }),
       });
       const paymentResponse = await response.json();
-      console.log("Payment Intent response:", paymentResponse);
-      
-      if (!response.ok) {
-        throw new Error(paymentResponse.error || 'Payment failed');
-      }
-      
+
+      if (!response.ok) throw new Error(paymentResponse.error || 'Payment failed');
+
       setSuccess(true);
       navigate(`/order/${orderId}/tracking`);
     } catch (serverError) {
-      setError("Payment failed: " + serverError.message);
+      setError('Payment failed: ' + serverError.message);
     }
-    
+
     setProcessing(false);
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <CardElement options={CARD_ELEMENT_OPTIONS} />
-      {error && <div style={{ color: 'red', marginTop: 10 }}>{error}</div>}
-      <button type="submit" disabled={!stripe || processing || success}>
-        {processing ? "Processing…" : "Pay Now"}
+      <div className="card-element-wrapper">
+        <CardElement options={CARD_ELEMENT_OPTIONS} />
+      </div>
+      {error && <div className="payment-error">{error}</div>}
+      {success && <div className="payment-success">Payment successful! Redirecting...</div>}
+      <button className="pay-btn" type="submit" disabled={!stripe || processing || success}>
+        {processing ? 'Processing...' : `Pay £${orderAmount.toFixed(2)}`}
       </button>
-      {success && <div style={{ color: 'green', marginTop: 10 }}>Payment Successful!</div>}
+      <p className="secure-badge">🔒 Payments secured by Stripe</p>
     </form>
   );
 }

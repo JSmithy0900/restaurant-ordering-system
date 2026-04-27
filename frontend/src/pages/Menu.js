@@ -57,46 +57,46 @@ export default function MenuPageWithCart() {
       <NavBar />
 
       <div className="menu-content">
-  <h1>Our Menu</h1>
+        <h1>Our Menu</h1>
+        <p className="menu-subtitle">Fresh ingredients, made to order</p>
 
-  {menuItems.length === 0 ? (
-    <p>Loading menu...</p>
-  ) : (
-    <div className="sections-container">
-      {sections.map(section => (
-        <section key={section} className="menu-section">
-          <h2>{section}s</h2>
-          {(!grouped[section] || !grouped[section].length) ? (
-            <p>No {section.toLowerCase()}s available.</p>
-          ) : (
-            <div className="menu-grid">
-              {grouped[section].map(item => {
-                const src = item.imageUrl?.trim() || placeholder;
-                return (
-                  <div key={item._id} className="menu-item">
-                    <img
-                      src={src}
-                      alt={item.name}
-                      className="menu-item__image"
-                      onError={e => { e.target.onerror = null; e.target.src = placeholder; }}
-                    />
-                    <h3>{item.name}</h3>
-                    <p>{item.description}</p>
-                    <p className="price">£{item.price.toFixed(2)}</p>
-                    <button onClick={() => addToCart(item)}>
-                      Add to Cart
-                    </button>
+        {menuItems.length === 0 ? (
+          <p>Loading menu...</p>
+        ) : (
+          <div className="sections-container">
+            {sections.map(section => (
+              <section key={section} className="menu-section">
+                <h2>{section}s</h2>
+                {(!grouped[section] || !grouped[section].length) ? (
+                  <p>No {section.toLowerCase()}s available.</p>
+                ) : (
+                  <div className="menu-grid">
+                    {grouped[section].map(item => {
+                      const src = item.imageUrl?.trim() || placeholder;
+                      return (
+                        <div key={item._id} className="menu-item">
+                          <img
+                            src={src}
+                            alt={item.name}
+                            className="menu-item__image"
+                            onError={e => { e.target.onerror = null; e.target.src = placeholder; }}
+                          />
+                          <div className="menu-item__body">
+                            <h3>{item.name}</h3>
+                            <p>{item.description}</p>
+                            <p className="price">£{item.price.toFixed(2)}</p>
+                            <button onClick={() => addToCart(item)}>Add to Basket</button>
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
-                );
-              })}
-            </div>
-          )}
-        </section>
-      ))}
-    </div>
-  )}
-</div>
-
+                )}
+              </section>
+            ))}
+          </div>
+        )}
+      </div>
 
       {cart.length > 0 && (
         <aside className="cart-sidebar">
@@ -106,17 +106,18 @@ export default function MenuPageWithCart() {
               <li key={ci._id} className="cart-item">
                 <span className="item-name">{ci.name}</span>
                 <div className="item-controls">
-                  <button onClick={() => decreaseQuantity(ci._id)}>-</button>
-                  <span className="item-quantity">x {ci.quantity}</span>
+                  <button onClick={() => decreaseQuantity(ci._id)}>−</button>
+                  <span className="item-quantity">{ci.quantity}</span>
                   <button onClick={() => increaseQuantity(ci._id)}>+</button>
                 </div>
-                <span className="item-price">
-                  = £{(ci.price * ci.quantity).toFixed(2)}
-                </span>
+                <span className="item-price">£{(ci.price * ci.quantity).toFixed(2)}</span>
               </li>
             ))}
           </ul>
-          <h2>Total: ${total.toFixed(2)}</h2>
+          <div className="cart-total">
+            <span>Total</span>
+            <span>£{total.toFixed(2)}</span>
+          </div>
           <Link to="/checkout">
             <button className="checkout-button">Proceed to Checkout</button>
           </Link>

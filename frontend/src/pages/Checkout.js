@@ -221,7 +221,7 @@ function CheckoutPage() {
             <button type="button" onClick={handleCheckDelivery}>
               Check Delivery
             </button>
-            {eta && <p>Estimated delivery time: {eta}</p>}
+            {eta && <p className="eta-badge">🕐 ETA: {eta}</p>}
             <button
               type="submit"
               disabled={deliveryEligible !== true}
@@ -236,7 +236,9 @@ function CheckoutPage() {
               Place Order
             </button>
           </form>
-          {message && <p className="order-message">{message}</p>}
+          {message && (
+            <p className={`order-message${message.includes('success') ? ' success' : ''}`}>{message}</p>
+          )}
         </section>
       </main>
 

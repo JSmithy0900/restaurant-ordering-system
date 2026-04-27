@@ -1,26 +1,170 @@
 .orders-management {
-    padding: 20px;
-  }
-    
-  .orders-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-  }
-  
-  .orders-table th,
-  .orders-table td {
-    border: 1px solid #ccc;
-    padding: 8px;
-    text-align: left;
-  }
-  
-  .orders-table th {
-    background-color: #f0f0f0;
-  }
-  
-  .error {
-    color: red;
-    margin-bottom: 10px;
-  }
-  
+  padding-top: 64px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+}
+
+.orders-management main {
+  flex: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 3rem 1.5rem 5rem;
+}
+
+.orders-management h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  margin: 0 0 2rem;
+}
+
+.orders-management section {
+  margin-bottom: 2.5rem;
+}
+
+.orders-management h2 {
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--muted);
+  margin: 0 0 1rem;
+}
+
+/* ── Table ── */
+.orders-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+  font-size: 0.875rem;
+}
+
+.orders-table thead tr {
+  background: var(--dark);
+}
+
+.orders-table th {
+  padding: 0.875rem 1rem;
+  text-align: left;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: rgba(255,255,255,0.7);
+  white-space: nowrap;
+}
+
+.orders-table td {
+  padding: 0.875rem 1rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  vertical-align: middle;
+}
+
+.orders-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.orders-table tbody tr:hover {
+  background: rgba(0,0,0,0.015);
+}
+
+/* Status badge */
+.status-badge {
+  display: inline-block;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.status-Pending       { background: #fef9c3; color: #854d0e; }
+.status-Confirmed     { background: #dbeafe; color: #1e40af; }
+.status-Preparing     { background: #fde8d1; color: #9a3412; }
+.status-Delivered     { background: #dcfce7; color: #15803d; }
+.status-PendingPayment { background: #f3f4f6; color: #6b7280; }
+
+/* Next stage button */
+.orders-table button {
+  padding: 0.4rem 0.875rem;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 0.8rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background var(--transition), transform var(--transition);
+  white-space: nowrap;
+}
+
+.orders-table button:hover {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+}
+
+/* Toggle + search */
+.toggle-btn {
+  padding: 0.55rem 1.1rem;
+  background: transparent;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color var(--transition), background var(--transition);
+  color: var(--text);
+  margin-bottom: 1.25rem;
+}
+
+.toggle-btn:hover {
+  border-color: var(--text);
+  background: rgba(0,0,0,0.03);
+}
+
+.delivered-section {
+  margin-top: 0.5rem;
+}
+
+.search-input {
+  width: 100%;
+  max-width: 340px;
+  padding: 0.6rem 0.875rem;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  font-family: inherit;
+  outline: none;
+  margin-bottom: 1.25rem;
+  background: var(--surface);
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.search-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-light);
+}
+
+.error {
+  color: #dc2626;
+  font-size: 0.875rem;
+  padding: 0.6rem 0.875rem;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: var(--radius);
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+  .orders-table { font-size: 0.8rem; }
+  .orders-table th, .orders-table td { padding: 0.65rem 0.6rem; }
+}
