@@ -10,10 +10,14 @@ exports.getMenuItems = async (req, res) => {
 };
 
 exports.createMenuItem = async (req, res) => {
-  const { name, description, price, category } = req.body;
-  const m = new MenuItem({ name, description, price, category });
-  await m.save();
-  res.status(201).json(m);
+  try {
+    const { name, description, price, category } = req.body;
+    const m = new MenuItem({ name, description, price, category });
+    await m.save();
+    res.status(201).json(m);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
 };
 
 exports.updateMenuItem = async (req, res) => {
@@ -33,7 +37,11 @@ exports.updateMenuItem = async (req, res) => {
 };
 
 exports.deleteMenuItem = async (req, res) => {
-  const { id } = req.params;
-  await MenuItem.findByIdAndDelete(id);
-  res.status(204).end();
+  try {
+    const { id } = req.params;
+    await MenuItem.findByIdAndDelete(id);
+    res.status(204).end();
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
 };

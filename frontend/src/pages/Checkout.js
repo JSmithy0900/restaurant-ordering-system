@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import NavBar from '../components/NavBar';
-import GoogleMapComponent from '../components/GoogleMap';
 import '../css/app.css';
 import '../css/Checkout.css'; // new file for summary styles
 

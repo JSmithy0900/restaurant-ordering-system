@@ -91,8 +91,8 @@ describe('ordersHandler', () => {
     });
 
     it('returns 200 and the order if found', async () => {
-      const mockOrder = { _id: 'o1', items: [] };
-      req = { params: { id: 'o1' } };
+      const mockOrder = { _id: 'o1', items: [], user: { toString: () => 'u1' } };
+      req = { params: { id: 'o1' }, user: { id: 'u1', role: 'customer' } };
       Order.findById = jest.fn().mockReturnValue({ populate: () => Promise.resolve(mockOrder) });
 
       await getOrder(req, res);

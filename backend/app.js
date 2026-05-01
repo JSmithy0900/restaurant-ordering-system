@@ -5,7 +5,7 @@ const cors    = require('cors');
 const app = express();
 
 app.use(cors({
-    origin: '*',                     // or your exact frontend URL
+    origin: 'https://restaurant-ordering-system-1.onrender.com',
     allowedHeaders: ['Content-Type','Authorization']
   }));
 app.use(express.json());

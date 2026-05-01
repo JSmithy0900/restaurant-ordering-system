@@ -47,6 +47,11 @@ exports.getOrder = async (req, res) => {
     if (!order) {
       return res.status(404).json({ error: 'Order not found' });
     }
+    const isOwner = order.user.toString() === req.user.id;
+    const isStaffOrAdmin = req.user.role === 'staff' || req.user.role === 'admin';
+    if (!isOwner && !isStaffOrAdmin) {
+      return res.status(403).json({ error: 'Access denied.' });
+    }
     res.status(200).json({ order });
   } catch (error) {
     res.status(400).json({ error: error.message });

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import NavBar from '../components/NavBar';
 import '../css/OrderTracking.css';
@@ -12,7 +12,7 @@ function OrderTrackingPage() {
   const [order, setOrder] = useState(null);
   const [error, setError] = useState('');
 
-  const fetchOrder = async () => {
+  const fetchOrder = useCallback(async () => {
     try {
       const token = localStorage.getItem('token');
       const response = await fetch(`https://restaurant-ordering-system-qbfz.onrender.com/api/orders/${orderId}`, {
@@ -24,13 +24,13 @@ function OrderTrackingPage() {
     } catch (err) {
       setError(err.message);
     }
-  };
+  }, [orderId]);
 
   useEffect(() => {
     fetchOrder();
     const interval = setInterval(fetchOrder, 10000);
     return () => clearInterval(interval);
-  }, [orderId]);
+  }, [fetchOrder]);
 
   const currentIndex = order ? STEPS.indexOf(order.status) : -1;
 

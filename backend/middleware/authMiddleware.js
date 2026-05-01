@@ -21,7 +21,6 @@ module.exports.verifyToken = (req, res, next) => {
 };
 
 module.exports.verifyAdmin = (req, res, next) => {
-  // Use verifyToken first to ensure req.user exists
   if (req.user && req.user.role === 'admin') {
     next();
   } else {
