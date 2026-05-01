@@ -33,7 +33,7 @@ export default function OrdersManagement() {
   const updateStatus = async (orderId, currentStatus) => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`https://restaurant-ordering-system-qbfz.onrender.com/api/orders/${orderId}/status`, { //http://localhost:5000/api/
+      const response = await fetch(`https://restaurant-ordering-system-qbfz.onrender.com/api/orders/${orderId}/status`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

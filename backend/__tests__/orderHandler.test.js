@@ -145,7 +145,7 @@ describe('ordersHandler', () => {
     it('advances status and sends SMS when delivered', async () => {
       req = { params: { orderId: 'o1' }, body: { currentStatus: 'Preparing' } };
       const updated = { _id: 'o1', status: 'Delivered', customerInfo: { firstName: 'Z', phone: '07222' } };
-      Order.findByIdAndUpdate = jest.fn().mockResolvedValue(updated);
+      Order.findByIdAndUpdate = jest.fn().mockReturnValue({ populate: jest.fn().mockResolvedValue(updated) });
 
       await updateOrderStatus(req, res);
       expect(Order.findByIdAndUpdate).toHaveBeenCalledWith(

@@ -94,7 +94,7 @@ exports.updateOrderStatus = async (req, res) => {
       orderId,
       { status: newStatus },
       { new: true }
-    );
+    ).populate('items.menuItem');
     
     if (!order) {
       return res.status(404).json({ error: 'Order not found.' });
