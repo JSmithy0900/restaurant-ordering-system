@@ -8,9 +8,16 @@
   },
   "jest": {
     "testEnvironment": "node",
-    "setupFilesAfterEnv": ["<rootDir>/jest-mongodb-setup.js"],
-    "testMatch": ["**/__tests__/**/*.test.js"],
-    "moduleFileExtensions": ["js", "json"]
+    "setupFilesAfterEnv": [
+      "<rootDir>/jest-mongodb-setup.js"
+    ],
+    "testMatch": [
+      "**/__tests__/**/*.test.js"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "json"
+    ]
   },
   "keywords": [],
   "author": "",
@@ -19,6 +26,7 @@
   "dependencies": {
     "axios": "^1.8.4",
     "bcrypt": "^5.1.1",
+    "bcryptjs": "^3.0.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
